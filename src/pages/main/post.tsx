@@ -5,5 +5,7 @@ interface Props{
 
 export const Post = (props: Props) =>{
     const {post} = props;
- return(<div></div>)
-}
+ return(<div>
+    
+ </div>)
+}   

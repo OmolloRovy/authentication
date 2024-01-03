@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { db } from "../../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { Post } from "./post";
+import { useState, useEffect } from "react";
 
 export interface Post {
   id: string;
