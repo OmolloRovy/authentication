@@ -1,4 +1,4 @@
-import { addDoc, collection, query } from "firebase/firestore";
+import { addDoc, collection, query, where } from "firebase/firestore";
 import {Post as IPost} from "./main"
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -10,6 +10,7 @@ export const Post = (props: Props) =>{
     const { post }  = props;
     const [user] = useAuthState(auth);
     const likesRef = collection(db, 'likes');
+const likesDoc = query(likesRef, where("postIid", "==", post.id))
 
     const addLike = async () => {
       try {
