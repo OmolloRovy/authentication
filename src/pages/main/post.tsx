@@ -2,7 +2,7 @@ import { addDoc, collection, query, where,getDocs } from "firebase/firestore";
 import {Post as IPost} from "./main"
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 interface Props{
     post: IPost
 }
@@ -10,12 +10,13 @@ interface Props{
 export const Post = (props: Props) =>{
     const { post }  = props;
     const [user] = useAuthState(auth);
+    const [likeAmount, setLikeAmount] = useState<number | null>(null)
     const likesRef = collection(db, 'likes');
     // Change the property name from postIid to postId
     const likesDoc = query(likesRef, where("postId", "==", post.id))
     const getLikes = async ()=>{
         const data =  await getDocs(likesDoc)
-        console.log(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        setLikeAmount(data.docs.length)
     };
     const addLike = async () => {
         await addDoc(likesRef, { userId:user?.uid , postId: post.id} );
@@ -40,7 +41,7 @@ export const Post = (props: Props) =>{
     <div className="footer">
         <p> @{post.username}</p>
         < button onClick={addLike}> 👍 </button>
-   <p> Likes {}</p>
+   {likeAmount && <p> Likes:  {likeAmount}</p>}
     </div>
  </div>
  )
