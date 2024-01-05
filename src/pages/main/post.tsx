@@ -7,6 +7,10 @@ interface Props{
     post: IPost
 }
 
+
+interface Like {
+   userId: string  
+}
 export const Post = (props: Props) =>{
     const { post }  = props;
     const [user] = useAuthState(auth);
