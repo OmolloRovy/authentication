@@ -2,7 +2,7 @@ import { addDoc, collection, query, where,getDocs } from "firebase/firestore";
 import {Post as IPost} from "./main"
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { log } from "console";
+import { useEffect } from "react";
 interface Props{
     post: IPost
 }
@@ -11,20 +11,21 @@ export const Post = (props: Props) =>{
     const { post }  = props;
     const [user] = useAuthState(auth);
     const likesRef = collection(db, 'likes');
-const likesDoc = query(likesRef, where("postIid", "==", post.id))
-const getLikes = async ()=>{
-const data =  await getDocs(likesDoc)
-console.log(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-}
-    const addLike = async () => {
-      try {
-        await addDoc(likesRef, { userId:user?.uid , postId: post.id} );
-       
-      } catch (error) {
-        // Handle errors appropriately, e.g., display an error message
-        console.error(error);
-      }
+    // Change the property name from postIid to postId
+    const likesDoc = query(likesRef, where("postId", "==", post.id))
+    const getLikes = async ()=>{
+        const data =  await getDocs(likesDoc)
+        console.log(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     };
+    const addLike = async () => {
+        await addDoc(likesRef, { userId:user?.uid , postId: post.id} );
+      
+     };
+
+     useEffect (()=>{
+        getLikes ();
+     
+     }, []);
 
  return(
  <div>
@@ -38,9 +39,9 @@ console.log(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
 
     <div className="footer">
         <p> @{post.username}</p>
-        < button onClick={addLike}> &#128077; </button>
+        < button onClick={addLike}> 👍 </button>
    <p> Likes {}</p>
     </div>
  </div>
  )
-}   
+}
