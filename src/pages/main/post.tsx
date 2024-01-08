@@ -14,18 +14,20 @@ interface Like {
 export const Post = (props: Props) =>{
     const { post }  = props;
     const [user] = useAuthState(auth);
-    const [likeAmount, setLikeAmount] = useState<number | null>(null)
+    const [likes, setLikes] = useState<Like [] | null>(null)
     const likesRef = collection(db, 'likes');
     // Change the property name from postIid to postId
     const likesDoc = query(likesRef, where("postId", "==", post.id))
     const getLikes = async ()=>{
         const data =  await getDocs(likesDoc)
-        setLikeAmount(data.docs.length)
+        setLikes(data.docs.map((doc) => ({userId: doc.data().userId })))
     };
     const addLike = async () => {
         await addDoc(likesRef, { userId:user?.uid , postId: post.id} );
       
      };
+
+     const hasUserLiked = likes?.find((like)=>like.userId=== user?.uid)
 
      useEffect (()=>{
         getLikes ();
@@ -44,8 +46,9 @@ export const Post = (props: Props) =>{
 
     <div className="footer">
         <p> @{post.username}</p>
-        < button onClick={addLike}> 👍 </button>
-   {likeAmount && <p> Likes:  {likeAmount}</p>}
+        <button onClick={addLike}> { hasUserLiked ? <>{'\uD83D\uDC4E'}</> : '{\uD83D\uDC4D}' } </button>
+
+   {likes && <p> Likes:  {likes?.length}</p>}
     </div>
  </div>
  )
