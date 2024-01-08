@@ -24,9 +24,11 @@ export const Post = (props: Props) =>{
     };
     const addLike = async () => {
         await addDoc(likesRef, { userId:user?.uid , postId: post.id} );
-        if ()
-      setLikes( (prrev)=>prev ? [...prev, {userId: user?.uid}] : [{userId: user?.uid}]);
-     };
+        if (user){
+      setLikes( (prev)=>prev ? [...prev, {userId: user.uid}] : [{userId: user.uid}]
+      );
+    }
+    };
 
      const hasUserLiked = likes?.find((like)=>like.userId=== user?.uid)
 
