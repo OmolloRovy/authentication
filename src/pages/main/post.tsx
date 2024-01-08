@@ -49,7 +49,7 @@ export const Post = (props: Props) =>{
 
     <div className="footer">
         <p> @{post.username}</p>
-        <button onClick={addLike}> { hasUserLiked ? <>'\uD83D\uDC4E'</> :  <>'\uD83D\uDC4D'</> } </button>
+        <button onClick={addLike}> { hasUserLiked ? <>&#128078;</> :  <>&#128077;</> } </button>
 
    {likes && <p> Likes:  {likes?.length}</p>}
     </div>
