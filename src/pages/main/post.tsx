@@ -24,7 +24,8 @@ export const Post = (props: Props) =>{
     };
     const addLike = async () => {
         await addDoc(likesRef, { userId:user?.uid , postId: post.id} );
-      
+        if ()
+      setLikes( (prrev)=>prev ? [...prev, {userId: user?.uid}] : [{userId: user?.uid}]);
      };
 
      const hasUserLiked = likes?.find((like)=>like.userId=== user?.uid)
@@ -46,7 +47,7 @@ export const Post = (props: Props) =>{
 
     <div className="footer">
         <p> @{post.username}</p>
-        <button onClick={addLike}> { hasUserLiked ? <>{'\uD83D\uDC4E'}</> : '{\uD83D\uDC4D}' } </button>
+        <button onClick={addLike}> { hasUserLiked ? <>'\uD83D\uDC4E'</> :  <>'\uD83D\uDC4D'</> } </button>
 
    {likes && <p> Likes:  {likes?.length}</p>}
     </div>
