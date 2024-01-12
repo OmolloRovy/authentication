@@ -16,6 +16,7 @@ interface Props {
 }
 
 interface Like {
+   likeId:string; 
   userId: string;
 }
 export const Post = (props: Props) => {
@@ -54,7 +55,7 @@ export const Post = (props: Props) => {
       const likeToDelete = doc(db, "likes",likeId );
       await deleteDoc(likeToDelete);
           if (user){
-        setLikes( (prev)=> prev?.filter((like)=>like.id === likeId)  );
+        setLikes( (prev)=> prev?.filter((like)=>like.likeId === likeId)  );
       }
     } catch (err) {
       console.log(err);
