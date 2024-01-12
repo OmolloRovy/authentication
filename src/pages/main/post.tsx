@@ -50,10 +50,11 @@ export const Post = (props: Props) => {
         where("userId", "==", user?.uid)
       );
       const likeToDeleteData = await getDocs(likeToDeleteQuery);
-      const likeToDelete = doc(db, "likes", likeToDeleteData.docs[0].id);
+      const likeId = likeToDeleteData.docs[0].id;
+      const likeToDelete = doc(db, "likes",likeId );
       await deleteDoc(likeToDelete);
           if (user){
-        setLikes( (prev)=>   );
+        setLikes( (prev)=> prev?.filter((like)=>like.id === likeId)  );
       }
     } catch (err) {
       console.log(err);
