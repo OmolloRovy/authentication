@@ -37,7 +37,7 @@ export const CreateForm = () => {
         username: user?.displayName,
         userId: user?.uid,
       });
-      navigate('./'); // Redirect after successful submission
+      navigate('/'); // Redirect to the home page
     } catch (error) {
       // Handle errors appropriately, e.g., display an error message
       console.error(error);

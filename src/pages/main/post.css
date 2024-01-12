@@ -1,0 +1,50 @@
+/* Style the title of the post */
+.title {
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Style the body of the post */
+.body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Style the footer of the post */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Style the username of the post author */
+.footer p {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #777;
+}
+
+/* Style the like button of the post */
+.footer button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* Style the like button when it is active */
+.footer button.active {
+  color: #f00;
+}
+
+/* Style the number of likes of the post */
+.footer p:last-child {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #777;
+}

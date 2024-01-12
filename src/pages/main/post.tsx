@@ -1,3 +1,4 @@
+import "./post.css"
 import {
   addDoc,
   collection,
