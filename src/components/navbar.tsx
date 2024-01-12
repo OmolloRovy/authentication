@@ -13,7 +13,7 @@ await signOut(auth);
 
   return (
     <div className="navbar">
-      <h1 className="blog-name">know it all</h1> 
+     
       <div className="links">
         <Link to="/">Home</Link>
         { !user ? (<Link to="/login">Login</Link>):(<Link to="/createpost">Create Post</Link>)}
