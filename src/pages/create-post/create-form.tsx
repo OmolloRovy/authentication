@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import *
+import * as yup
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { addDoc, collection } from 'firebase/firestore';
